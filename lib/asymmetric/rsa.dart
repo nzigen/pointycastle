@@ -6,8 +6,6 @@ library pointycastle.impl.asymmetric_block_cipher.rsa;
 
 import "dart:typed_data";
 
-import "package:bignum/bignum.dart";
-
 import "package:pointycastle/api.dart";
 import "package:pointycastle/asymmetric/api.dart";
 import "package:pointycastle/src/impl/base_asymmetric_block_cipher.dart";
@@ -20,9 +18,9 @@ class RSAEngine extends BaseAsymmetricBlockCipher {
 
   bool _forEncryption;
   RSAAsymmetricKey _key;
-  BigInteger _dP;
-  BigInteger _dQ;
-  BigInteger _qInv;
+  BigInt _dP;
+  BigInt _dQ;
+  BigInt _qInv;
 
   String get algorithmName => "RSA";
 
@@ -31,7 +29,7 @@ class RSAEngine extends BaseAsymmetricBlockCipher {
       throw new StateError("Input block size cannot be calculated until init() called");
     }
 
-    var bitSize = _key.modulus.bitLength();
+    var bitSize = _key.modulus.bitLength;
     if (_forEncryption) {
       return ((bitSize + 7) ~/ 8) - 1;
     } else {
@@ -44,7 +42,7 @@ class RSAEngine extends BaseAsymmetricBlockCipher {
       throw new StateError("Output block size cannot be calculated until init() called");
     }
 
-    var bitSize = _key.modulus.bitLength();
+    var bitSize = _key.modulus.bitLength;
     if (_forEncryption) {
       return (bitSize + 7) ~/ 8;
     } else {
@@ -61,8 +59,8 @@ class RSAEngine extends BaseAsymmetricBlockCipher {
 
     if (_key is RSAPrivateKey) {
       var privKey = (_key as RSAPrivateKey);
-      var pSub1 = (privKey.p - BigInteger.ONE);
-      var qSub1 = (privKey.q - BigInteger.ONE);
+      var pSub1 = (privKey.p - BigInt.one);
+      var qSub1 = (privKey.q - BigInt.one);
       _dP = privKey.d.remainder(pSub1);
       _dQ = privKey.d.remainder(qSub1);
       _qInv = privKey.q.modInverse(privKey.p);
@@ -76,7 +74,7 @@ class RSAEngine extends BaseAsymmetricBlockCipher {
   }
 
 
-  BigInteger _convertInput(Uint8List inp, int inpOff, int len) {
+  BigInt _convertInput(Uint8List inp, int inpOff, int len) {
     var inpLen = inp.length;
 
     if (inpLen > (inputBlockSize + 1)) {
@@ -87,7 +85,7 @@ class RSAEngine extends BaseAsymmetricBlockCipher {
       throw new ArgumentError("Input too large for RSA cipher");
     }
 
-    var res = new BigInteger.fromBytes(1, inp.sublist(inpOff, inpOff+len));
+    var res = new BigInt.fromBytes(1, inp.sublist(inpOff, inpOff+len));
     if (res >= _key.modulus) {
       throw new ArgumentError("Input too large for RSA cipher");
     }
@@ -95,7 +93,7 @@ class RSAEngine extends BaseAsymmetricBlockCipher {
     return res;
   }
 
-  int _convertOutput(BigInteger result, Uint8List out, int outOff) {
+  int _convertOutput(BigInt result, Uint8List out, int outOff) {
     final output = result.toByteArray();
 
     if (_forEncryption) {
@@ -123,7 +121,7 @@ class RSAEngine extends BaseAsymmetricBlockCipher {
     return output.length;
   }
 
-  BigInteger _processBigInteger(BigInteger input) {
+  BigInt _processBigInteger(BigInt input) {
     if (_key is RSAPrivateKey) {
       var privKey = (_key as RSAPrivateKey);
       var mP, mQ, h, m;
