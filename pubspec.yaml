@@ -9,7 +9,6 @@ environment:
 dependencies:
   bignum: ">=0.1.0 <0.2.0"
   fixnum: ">=0.10.2 <0.11.0"
-  reflectable: ">=1.0.1 <2.0.0"
   quiver_collection: ">=1.0.0 <2.0.0"
   quiver_pattern: ">=1.0.0 <2.0.0"
 
@@ -20,9 +19,6 @@ dev_dependencies:
   test: ">=0.12.7 <0.13.0"
 
 transformers:
-- reflectable:
-    entry_points:
-      - test/all_tests_web.dart
 - test/pub_serve:
     $include:
       - test/all_tests_web{.*,}.dart
