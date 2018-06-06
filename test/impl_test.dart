@@ -40,25 +40,6 @@ void main() {
       testDigest("Whirlpool");
     });
 
-    test("ECDomainParameters returns valid implementations", () {
-      testECDomainParameters("prime192v1");
-    });
-
-    test("KeyDerivator returns valid implementations", () {
-      testKeyDerivator("SHA-1/HMAC/PBKDF2");
-      testKeyDerivator("scrypt");
-    });
-
-    test("KeyGenerator returns valid implementations", () {
-      testKeyGenerator("EC");
-      testKeyGenerator("RSA");
-    });
-
-    test("Mac returns valid implementations", () {
-      testMac("SHA-1/HMAC");
-      testMac("SHA-256/HMAC");
-      testMac("RIPEMD-160/HMAC");
-    });
 
     test("BlockCipher returns valid implementations for modes of operation", () {
       testBlockCipher("AES/CBC");

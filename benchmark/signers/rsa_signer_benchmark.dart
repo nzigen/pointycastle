@@ -4,7 +4,6 @@
 
 library pointycastle.benchmark.signers.rsa_signer_benchmark;
 
-import 'package:bignum/bignum.dart';
 import "package:pointycastle/pointycastle.dart";
 import "package:pointycastle/signers/rsa_signer.dart";
 
