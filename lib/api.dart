@@ -13,8 +13,6 @@ library pointycastle.api;
 
 import "dart:typed_data";
 
-import "package:bignum/bignum.dart";
-
 import "src/registry/registry.dart";
 
 part "src/api/algorithm.dart";
@@ -40,7 +38,6 @@ part "src/api/private_key.dart";
 part "src/api/private_key_parameter.dart";
 part "src/api/public_key.dart";
 part "src/api/public_key_parameter.dart";
-part "src/api/secure_random.dart";
 part "src/api/signature.dart";
 part "src/api/signer.dart";
 part "src/api/stream_cipher.dart";
