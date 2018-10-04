@@ -12,14 +12,6 @@ import "package:pointycastle/src/impl/base_block_cipher.dart";
 /// Implementation of Cipher-Block-Chaining (CBC) mode on top of a [BlockCipher].
 class CBCBlockCipher extends BaseBlockCipher {
 
-  /// Intended for internal use.
-  static final FactoryConfig FACTORY_CONFIG =
-      new DynamicFactoryConfig.suffix(BlockCipher, "/CBC",
-        (_, final Match match) => () {
-          BlockCipher underlying = new BlockCipher(match.group(1));
-          return new CBCBlockCipher(underlying);
-        });
-
   final BlockCipher _underlyingCipher;
 
   Uint8List _IV;

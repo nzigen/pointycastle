@@ -20,14 +20,6 @@ import "package:pointycastle/src/registry/registry.dart";
  */
 class SICStreamCipher extends BaseStreamCipher {
 
-  /// Intended for internal use.
-  static final FactoryConfig FACTORY_CONFIG =
-      new DynamicFactoryConfig.suffix(StreamCipher, "/SIC",
-        (_, final Match match) => () {
-          String digestName = match.group(1);
-          return new SICStreamCipher(new BlockCipher(digestName));
-        });
-
   final BlockCipher underlyingCipher;
 
   Uint8List _iv;

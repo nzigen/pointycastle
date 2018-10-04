@@ -17,21 +17,6 @@ import "package:pointycastle/src/impl/base_mac.dart";
  */
 class HMac extends BaseMac {
 
-  static final FactoryConfig FACTORY_CONFIG =
-      new DynamicFactoryConfig.suffix(Mac, "/HMAC",
-        (_, Match match) {
-          final String digestName = match.group(1);
-          final int blockLength = _DIGEST_BLOCK_LENGTH[digestName];
-          if (blockLength == null) {
-            throw new RegistryFactoryException("Digest $digestName unknown for "
-              "HMAC construction.");
-          }
-          return () {
-            Digest digest = new Digest(digestName);
-            return new HMac(digest, blockLength);
-          };
-        });
-
   //TODO make this more generic
   static final Map<String, int> _DIGEST_BLOCK_LENGTH = {
     "GOST3411": 32,
